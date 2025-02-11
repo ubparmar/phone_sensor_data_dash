@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page_title }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .card { box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px; }
+        .card-title { font-weight: bold; }
+        .info-text { font-size: 0.9rem; color: #555; }
+        .tooltip-icon {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">{{ page_title }}</h1>
+        <p class="text-center info-text">{{ description }}</p>
+
+        <div class="row g-4">
+            <!-- Accelerometer Data -->
+            <div class="col-md-6">
+                <div class="card p-3">
+                    <h5 class="card-title">
+                        Accelerometer Data
+                        <span class="tooltip-icon" data-bs-toggle="tooltip" title="Shows acceleration values in X, Y, and Z directions over time.">ℹ️</span>
+                    </h5>
+                    {{ acc_graph|safe }}
+                </div>
+            </div>
+
+            <!-- Gyroscope Data -->
+            <div class="col-md-6">
+                <div class="card p-3">
+                    <h5 class="card-title">
+                        Gyroscope Data
+                        <span class="tooltip-icon" data-bs-toggle="tooltip" title="Tracks angular velocity changes in X, Y, and Z axes.">ℹ️</span>
+                    </h5>
+                    {{ gyro_graph|safe }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <!-- GPS Location Tracking -->
+            <div class="col-md-6">
+                <div class="card p-3">
+                    <h5 class="card-title">
+                        GPS Location Tracking
+                        <span class="tooltip-icon" data-bs-toggle="tooltip" title="Visualizes recorded GPS locations on a map.">ℹ️</span>
+                    </h5>
+                    {{ map_graph|safe }}
+                </div>
+            </div>
+
+            <!-- Battery Level -->
+            <div class="col-md-6">
+                <div class="card p-3">
+                    <h5 class="card-title">
+                        Battery Level Over Time
+                        <span class="tooltip-icon" data-bs-toggle="tooltip" title="Tracks battery level changes over time.">ℹ️</span>
+                    </h5>
+                    {{ battery_graph|safe }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <!-- Histogram of Accelerometer Data -->
+            <div class="col-12">
+                <div class="card p-3">
+                    <h5 class="card-title">
+                        Distribution of Accelerometer Readings
+                        <span class="tooltip-icon" data-bs-toggle="tooltip" title="Shows the frequency distribution of accelerometer values.">ℹ️</span>
+                    </h5>
+                    {{ hist_graph|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Enable Bootstrap tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    </script>
+</body>
+</html>
